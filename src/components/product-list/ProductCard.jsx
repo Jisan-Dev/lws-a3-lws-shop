@@ -40,9 +40,8 @@ export default function ProductCard({ product }) {
         <p className="font-bold">${product.price} </p>
         {isInCart(product.id) ? (
           <button
-            disabled={product.stock === 0}
             onClick={() => removeFromCart(product.id)}
-            className="w-full mt-2 bg-red-800 disabled:bg-red-800/70 py-1  text-gray-100 rounded flex items-center justify-center">
+            className="w-full mt-2 bg-red-800  py-1  text-gray-100 rounded flex items-center justify-center">
             Remove from Cart
           </button>
         ) : (
