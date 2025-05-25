@@ -3,10 +3,11 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Newsletter from "./components/Newsletter";
 import ProductList from "./components/product-list/ProductList";
+import ShopProvider from "./contexts";
 
 function App() {
   return (
-    <>
+    <ShopProvider>
       <Header />
       <main className="container mx-auto px-4 md:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -18,7 +19,7 @@ function App() {
       </main>
       <Newsletter />
       <Footer />
-    </>
+    </ShopProvider>
   );
 }
 
