@@ -42,7 +42,7 @@ export default function ProductCard({ product }) {
           <button
             disabled={product.stock === 0}
             onClick={() => removeFromCart(product.id)}
-            className="w-full mt-2 bg-red-800 disabled:bg-red-800/70 py-1 disabled:cursor-not-allowed text-gray-100 rounded flex items-center justify-center">
+            className="w-full mt-2 bg-red-800 disabled:bg-red-800/70 py-1  text-gray-100 rounded flex items-center justify-center">
             Remove from Cart
           </button>
         ) : (

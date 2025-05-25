@@ -54,6 +54,39 @@ export default function ShopProvider({ children }) {
     dispatch({ type: ACTIONS.SET_SEARCH_TERM, payload: searchTerm });
   };
 
+  const getProductById = (id) => state.products.find((p) => p.id === id);
+
+  const increaseQuantity = (productId) => {
+    dispatch({ type: ACTIONS.INCREASE_QUANTITY, payload: { productId } });
+  };
+
+  const decreaseQuantity = (productId) => {
+    dispatch({ type: ACTIONS.DECREASE_QUANTITY, payload: { productId } });
+  };
+
+  const getCartItemQuantity = (productId) => {
+    const item = state.cart.find((item) => item.productId === productId);
+    return item ? item.quantity : 0;
+  };
+
+  const getOrderSummary = () => {
+    const subtotal = state.cart.reduce((total, item) => {
+      const product = getProductById(item.productId);
+      return total + (product ? product.price * item.quantity : 0);
+    }, 0);
+
+    const discount = subtotal * 0.2; // 20% discount
+    const deliveryFee = 5.99; // Fixed delivery fee
+    const total = subtotal - discount + deliveryFee;
+
+    return {
+      subtotal: subtotal.toFixed(2),
+      discount: discount.toFixed(2),
+      deliveryFee: deliveryFee.toFixed(2),
+      total: total.toFixed(2),
+    };
+  };
+
   const value = {
     state,
     addToCart,
@@ -62,6 +95,11 @@ export default function ShopProvider({ children }) {
     getFilteredAndSortedProducts,
     setSortType,
     setSearchTerm,
+    getProductById,
+    decreaseQuantity,
+    increaseQuantity,
+    getCartItemQuantity,
+    getOrderSummary,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

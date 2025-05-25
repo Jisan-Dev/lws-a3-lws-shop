@@ -81,7 +81,7 @@ function shopReducer(state, action) {
       const { productId } = action.payload;
       const product = state.products.find((product) => product.id === productId);
 
-      if (!product || product.stock <= 1) {
+      if (!product) {
         return state;
       }
 
